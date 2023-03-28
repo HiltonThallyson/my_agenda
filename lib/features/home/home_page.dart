@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
 import './widgets/date_selection_card.dart';
@@ -112,8 +113,9 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      floatingActionButton:
-          FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add)),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => Modular.to.pushNamed('task-form-screen'),
+          child: const Icon(Icons.add)),
     );
   }
 }

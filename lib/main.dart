@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [Locale('pt', 'BR')],
       theme: ThemeData(
           colorScheme:
-              ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple, accentColor: ),),
+              ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)),
       debugShowCheckedModeBanner: false,
       title: 'minha agenda',
       routeInformationParser: Modular.routeInformationParser,
