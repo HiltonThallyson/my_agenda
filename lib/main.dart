@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-import 'features/home/home_page.dart';
+import 'features/modules/app_modules.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ModularApp(module: AppModules(), child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
@@ -21,10 +22,11 @@ class MyApp extends StatelessWidget {
       supportedLocales: const [Locale('pt', 'BR')],
       theme: ThemeData(
           colorScheme:
-              ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)),
+              ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple, accentColor: ),),
       debugShowCheckedModeBanner: false,
       title: 'minha agenda',
-      home: const HomePage(),
+      routeInformationParser: Modular.routeInformationParser,
+      routerDelegate: Modular.routerDelegate,
     );
   }
 }
