@@ -11,6 +11,9 @@ class TaskForm extends StatefulWidget {
 class _TaskFormState extends State<TaskForm> {
   final _formKey = GlobalKey<FormState>();
   DateTime _selectedDate = DateTime.now();
+  TimeOfDay _start = const TimeOfDay(hour: 09, minute: 00);
+  TimeOfDay _end = const TimeOfDay(hour: 09, minute: 30);
+  var _isDaily = false;
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +91,71 @@ class _TaskFormState extends State<TaskForm> {
                 ])
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                const Text('Início'),
+                InkWell(
+                  onTap: () async {
+                    TimeOfDay? timePicked = await showTimePicker(
+                        context: context, initialTime: _start);
+                    setState(() {
+                      if (timePicked != null) {
+                        _start = timePicked;
+                      }
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 100,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.black54),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(_start.format(context)),
+                  ),
+                ),
+                const Text('Fim'),
+                InkWell(
+                  onTap: () async {
+                    TimeOfDay? timePicked = await showTimePicker(
+                        context: context, initialTime: _end);
+                    setState(() {
+                      if (timePicked != null) {
+                        _end = timePicked;
+                      }
+                    });
+                  },
+                  child: Container(
+                    alignment: Alignment.center,
+                    width: 100,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      border: Border.all(width: 1, color: Colors.black54),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(_end.format(context)),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Checkbox(
+              checkColor: Colors.white,
+              activeColor: Theme.of(context).colorScheme.primary,
+              value: _isDaily,
+              onChanged: (value) {
+                setState(() {
+                  _isDaily = value!;
+                });
+              },
+            )
           ]),
         ));
   }
