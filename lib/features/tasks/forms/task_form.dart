@@ -146,10 +146,14 @@ class _TaskFormState extends State<TaskForm> {
             const SizedBox(
               height: 10,
             ),
-            Checkbox(
+            CheckboxListTile(
+              contentPadding: const EdgeInsets.all(5),
+              controlAffinity: ListTileControlAffinity.leading,
+              title: const Text('Repete diariamente'),
               checkColor: Colors.white,
               activeColor: Theme.of(context).colorScheme.primary,
               value: _isDaily,
+              visualDensity: VisualDensity.adaptivePlatformDensity,
               onChanged: (value) {
                 setState(() {
                   _isDaily = value!;
