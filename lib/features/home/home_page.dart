@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
+import '../tasks/state/tasks_state_data.dart';
 import './widgets/date_selection_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -14,6 +16,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   var selectedDay = 0;
+  var taskState = Modular.get<TaskState>();
 
   int _getMonthDays() {
     final month = DateTime.now().month;
@@ -94,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                   width: 15,
                 ),
                 scrollDirection: Axis.horizontal,
-                itemCount: _getMonthDays() - DateTime.now().day,
+                itemCount: _getMonthDays() - currentDate.day,
                 itemBuilder: (_, index) => GestureDetector(
                   onTap: () {
                     setState(() {
@@ -103,18 +106,44 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: DateSelectionCard(
                     isSelected: selectedDay == index,
-                    date: DateTime.now().add(
+                    date: currentDate.add(
                       Duration(days: index),
                     ),
                   ),
                 ),
               ),
             ),
+            Expanded(
+              child: Observer(
+                builder: (_) => ListView.builder(
+                    itemCount: taskState.tasks
+                        .where((task) => DateUtils.isSameDay(
+                            currentDate.add(Duration(days: selectedDay)),
+                            task.day))
+                        .toList()
+                        .length,
+                    itemBuilder: (context, index) {
+                      var currentTask = taskState.tasks
+                          .where((task) => DateUtils.isSameDay(
+                              currentDate.add(Duration(days: selectedDay)),
+                              task.day))
+                          .toList()[index];
+                      return Observer(
+                        builder: (context) => ListTile(
+                          tileColor: Colors.blue,
+                          title: Text(currentTask.name),
+                        ),
+                      );
+                    }),
+              ),
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          onPressed: () => Modular.to.pushNamed('task-form-screen'),
+          onPressed: () => Modular.to.pushNamed('task-form-screen').then((_) {
+                setState(() {});
+              }),
           child: const Icon(Icons.add)),
     );
   }

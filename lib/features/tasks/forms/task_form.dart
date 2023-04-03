@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
+import '../state/tasks_state_data.dart';
 import '../task.dart';
 
 class TaskForm extends StatefulWidget {
@@ -13,6 +15,8 @@ class TaskForm extends StatefulWidget {
 }
 
 class _TaskFormState extends State<TaskForm> {
+  final taskState = Modular.get<TaskState>();
+
   final _formKey = GlobalKey<FormState>();
   DateTime _selectedDate = DateTime.now();
   TimeOfDay _start = const TimeOfDay(hour: 09, minute: 00);
@@ -66,6 +70,8 @@ class _TaskFormState extends State<TaskForm> {
           start: _start,
           end: _end,
           isDaily: _isDaily);
+      taskState.addTask(newTask);
+      Modular.to.pop();
     }
   }
 

@@ -41,6 +41,8 @@ dependencies:
   flutter_modular: ^5.0.3
   intl: ^0.17.0
   mobx: ^2.1.4
+  mobx_codegen: ^2.1.1
+  flutter_mobx: ^2.0.6+5
   
 
 dev_dependencies:
