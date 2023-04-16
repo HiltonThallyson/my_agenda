@@ -15,8 +15,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  var selectedDay = 0;
+  var selectedDay = DateTime.now().day - 1;
   var taskState = Modular.get<TaskState>();
+  final _scrollController = ScrollController(
+    initialScrollOffset: (65 * (DateTime.now().day - 1)).toDouble(),
+  );
 
   int _getMonthDays() {
     final month = DateTime.now().month;
@@ -96,8 +99,9 @@ class _HomePageState extends State<HomePage> {
                 separatorBuilder: (context, index) => const SizedBox(
                   width: 15,
                 ),
+                controller: _scrollController,
                 scrollDirection: Axis.horizontal,
-                itemCount: _getMonthDays() - currentDate.day,
+                itemCount: _getMonthDays(),
                 itemBuilder: (_, index) => GestureDetector(
                   onTap: () {
                     setState(() {
@@ -106,7 +110,7 @@ class _HomePageState extends State<HomePage> {
                   },
                   child: DateSelectionCard(
                     isSelected: selectedDay == index,
-                    date: currentDate.add(
+                    date: DateTime(2023, DateTime.now().month).add(
                       Duration(days: index),
                     ),
                   ),

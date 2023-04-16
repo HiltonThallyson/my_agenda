@@ -102,7 +102,7 @@ class _TaskFormState extends State<TaskForm> {
                     validator: (value) {
                       if (value!.isEmpty) {
                         return 'Insira um nome para a tarefa';
-                      } else if (value!.length > 150) {
+                      } else if (value.length > 150) {
                         return 'Tamanho máximo: 150 caracteres';
                       } else {
                         return null;

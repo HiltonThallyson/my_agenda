@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 class DateSelectionCard extends StatelessWidget {
   final DateTime date;
   final bool isSelected;
+
   const DateSelectionCard(
       {required this.date, required this.isSelected, super.key});
 
@@ -11,8 +12,13 @@ class DateSelectionCard extends StatelessWidget {
     return '${text[0].toUpperCase()}${text.substring(1).toLowerCase()}';
   }
 
+  bool _checkIfDateIsBeforeCurrentDate() {
+    return date.day < DateTime.now().day;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isDateBeforeNow = _checkIfDateIsBeforeCurrentDate();
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -27,11 +33,15 @@ class DateSelectionCard extends StatelessWidget {
         children: [
           Text(
             captaliseFirstLetter(DateFormat('EEE', 'pt-br').format(date)),
-            style: TextStyle(color: Colors.white, fontSize: 14),
+            style: TextStyle(
+                color: isDateBeforeNow ? Colors.black45 : Colors.white,
+                fontSize: 14),
           ),
           Text(
             date.day.toString(),
-            style: TextStyle(color: Colors.white, fontSize: 14),
+            style: TextStyle(
+                color: isDateBeforeNow ? Colors.black45 : Colors.white,
+                fontSize: 14),
           ),
         ],
       ),
