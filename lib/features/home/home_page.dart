@@ -5,6 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
 
 import '../tasks/state/tasks_state_data.dart';
+import '../tasks/widgets/task_card.dart';
 import './widgets/date_selection_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -24,35 +25,36 @@ class _HomePageState extends State<HomePage> {
   int _getMonthDays() {
     final month = DateTime.now().month;
     final year = DateTime.now().year;
-    switch (month) {
-      case 1:
-        return 31;
-      case 2:
-        if ((year / 1000 == (year ~/ 1000)) && (year % 4 == 0)) {
-          return 29;
-        }
-        return 28;
-      case 3:
-        return 31;
-      case 4:
-        return 30;
-      case 5:
-        return 31;
-      case 6:
-        return 30;
-      case 7:
-        return 31;
-      case 8:
-        return 31;
-      case 9:
-        return 30;
-      case 10:
-        return 31;
-      case 11:
-        return 30;
-      default:
-        return 31;
-    }
+    return DateUtils.getDaysInMonth(year, month);
+    // switch (month) {
+    //   case 1:
+    //     return 31;
+    //   case 2:
+    //     if ((year / 1000 == (year ~/ 1000)) && (year % 4 == 0)) {
+    //       return 29;
+    //     }
+    //     return 28;
+    //   case 3:
+    //     return 31;
+    //   case 4:
+    //     return 30;
+    //   case 5:
+    //     return 31;
+    //   case 6:
+    //     return 30;
+    //   case 7:
+    //     return 31;
+    //   case 8:
+    //     return 31;
+    //   case 9:
+    //     return 30;
+    //   case 10:
+    //     return 31;
+    //   case 11:
+    //     return 30;
+    //   default:
+    //     return 31;
+    // }
   }
 
   @override
@@ -109,11 +111,8 @@ class _HomePageState extends State<HomePage> {
                     });
                   },
                   child: DateSelectionCard(
-                    isSelected: selectedDay == index,
-                    date: DateTime(2023, DateTime.now().month).add(
-                      Duration(days: index),
-                    ),
-                  ),
+                      isSelected: selectedDay == index,
+                      date: DateTime(2023, DateTime.now().month, index + 1)),
                 ),
               ),
             ),
@@ -122,20 +121,21 @@ class _HomePageState extends State<HomePage> {
                 builder: (_) => ListView.builder(
                     itemCount: taskState.tasks
                         .where((task) => DateUtils.isSameDay(
-                            currentDate.add(Duration(days: selectedDay)),
-                            task.day))
+                            task.day,
+                            DateTime(DateTime.now().year, DateTime.now().month,
+                                selectedDay + 1)))
                         .toList()
                         .length,
                     itemBuilder: (context, index) {
                       var currentTask = taskState.tasks
                           .where((task) => DateUtils.isSameDay(
-                              currentDate.add(Duration(days: selectedDay)),
-                              task.day))
+                              task.day,
+                              DateTime(DateTime.now().year,
+                                  DateTime.now().month, selectedDay + 1)))
                           .toList()[index];
                       return Observer(
-                        builder: (context) => ListTile(
-                          tileColor: Colors.blue,
-                          title: Text(currentTask.name),
+                        builder: (context) => TaskCard(
+                          task: currentTask,
                         ),
                       );
                     }),
