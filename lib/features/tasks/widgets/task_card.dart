@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_agenda/utils/appColors.dart';
+import 'package:my_agenda/utils/appcolors.dart';
 
 import '../../../utils/appthemes.dart';
 import '../task.dart';
@@ -20,13 +20,13 @@ class TaskCard extends StatelessWidget {
         children: [
           Container(
             decoration: const BoxDecoration(
-              color: AppColors.primaryAppColor,
+              color: AppColors.tertiaryAppColor,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   bottomLeft: Radius.circular(15)),
             ),
             width: 100,
-            height: 80,
+            height: 90,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -51,8 +51,8 @@ class TaskCard extends StatelessWidget {
             ),
           ),
           Container(
-            decoration: const BoxDecoration(color: AppColors.primaryAppColor),
-            height: 80,
+            decoration: const BoxDecoration(color: AppColors.tertiaryAppColor),
+            height: 90,
             child: const VerticalDivider(
               width: 0,
               thickness: 2,

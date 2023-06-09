@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
-import 'package:my_agenda/utils/appColors.dart';
+import 'package:my_agenda/utils/appcolors.dart';
 
 import '../tasks/state/tasks_state_data.dart';
 import '../tasks/widgets/task_card.dart';
@@ -117,7 +117,8 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            Expanded(
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.61,
               child: Observer(
                 builder: (_) => ListView.builder(
                     itemCount: taskState.tasks
@@ -150,6 +151,7 @@ class _HomePageState extends State<HomePage> {
                 setState(() {});
               }),
           child: const Icon(Icons.add)),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
