@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_agenda/utils/appColors.dart';
 
 import '../../../utils/appthemes.dart';
 import '../task.dart';
@@ -11,19 +12,21 @@ class TaskCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(15),
-      elevation: 10,
+      elevation: 5,
       shape: RoundedRectangleBorder(
           side: const BorderSide(width: 0.25),
-          borderRadius: BorderRadius.circular(5)),
+          borderRadius: BorderRadius.circular(15)),
       child: Row(
         children: [
           Container(
             decoration: const BoxDecoration(
+              color: AppColors.primaryAppColor,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(5), bottomLeft: Radius.circular(5)),
+                  topLeft: Radius.circular(15),
+                  bottomLeft: Radius.circular(15)),
             ),
             width: 100,
-            height: 100,
+            height: 80,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -47,11 +50,13 @@ class TaskCard extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(
-            height: 70,
-            child: VerticalDivider(
-              thickness: 1,
-              color: Colors.black,
+          Container(
+            decoration: const BoxDecoration(color: AppColors.primaryAppColor),
+            height: 80,
+            child: const VerticalDivider(
+              width: 0,
+              thickness: 2,
+              color: Colors.black87,
             ),
           ),
           const SizedBox(

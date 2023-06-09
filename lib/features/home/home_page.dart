@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:intl/intl.dart';
+import 'package:my_agenda/utils/appColors.dart';
 
 import '../tasks/state/tasks_state_data.dart';
 import '../tasks/widgets/task_card.dart';
@@ -95,7 +96,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             Container(
               padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              color: Colors.deepPurple,
+              color: AppColors.primaryAppColor,
               height: 110,
               child: ListView.separated(
                 separatorBuilder: (context, index) => const SizedBox(
