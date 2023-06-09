@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_agenda/utils/appColors.dart';
 
 class DateSelectionCard extends StatelessWidget {
   final DateTime date;
@@ -22,7 +23,7 @@ class DateSelectionCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: isSelected ? const Color(0xFFEC3C22) : Colors.transparent),
+          color: isSelected ? AppColors.secondaryAppColor : Colors.transparent),
       margin: const EdgeInsets.only(
         bottom: 15,
       ),

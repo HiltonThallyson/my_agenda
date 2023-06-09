@@ -62,7 +62,13 @@ class TaskCard extends StatelessWidget {
           const SizedBox(
             width: 10,
           ),
-          Text(task.name)
+          Flexible(
+            child: Text(
+              task.name,
+              maxLines: 2,
+              softWrap: true,
+            ),
+          )
         ],
       ),
     );
